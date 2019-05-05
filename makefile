@@ -1,3 +1,6 @@
+# taken from https://github.com/guillaumegenthial/sequence_tagging/blob/master/makefile
+# use this file if running in linux
+
 glove:
 	wget -P ./data/ "http://nlp.stanford.edu/data/glove.6B.zip"
 	unzip ./data/glove.6B.zip -d data/glove.6B/
