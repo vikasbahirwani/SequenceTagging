@@ -1,1 +1,7 @@
-data/
+*sh
+*pyc
+*idea
+/data
+!/data/.gitkeep
+/results
+*.DS_Store
