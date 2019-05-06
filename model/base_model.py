@@ -51,7 +51,7 @@ class BaseModel(object):
             # TODO: Review the following:
             if clip > 0:  # gradient clipping if clip is positive
                 grads, vs = zip(*optimizer.compute_gradients(loss))
-                grads, gnorm = tf.clip_by_global_norm(grads, clip)
+                grads, _ = tf.clip_by_global_norm(grads, clip)
                 self.train_op = optimizer.apply_gradients(zip(grads, vs))
             else:
                 self.train_op = optimizer.minimize(loss)
