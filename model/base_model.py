@@ -48,7 +48,6 @@ class BaseModel(object):
             else:
                 raise NotImplementedError("Unsupported lr_method supplied {:}".format(lr_method))
 
-            # TODO: Review the following:
             if clip > 0:  # gradient clipping if clip is positive
                 grads, vs = zip(*optimizer.compute_gradients(loss))
                 grads, _ = tf.clip_by_global_norm(grads, clip)
