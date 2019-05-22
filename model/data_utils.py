@@ -142,10 +142,70 @@ def get_glove_vocab(filename):
     print(" - finished building glove vocab. # of glove words = {:}".format(len(vocab_glove)))
     return vocab_glove
 
+def write_vocab(vocab, filename):
+    """Writes vocab to given file
 
+    :param vocab: the vocabulary to save
+    :param filename: full file path including it's name
+    :return writes one word per line
+    """
 
+    print("Writing vocab to file")
 
+    word_count = len(vocab)
+    with open(filename, "w") as f:
+        for i,word in enumerate(vocab):
+            if i != word_count:
+                f.write("{:}\n".format(word))
+            else:
+                f.write(word)
 
+    print(" - done. {:} word types written".format(word_count))
+
+def load_vocab(filename):
+    """ Loads the vocab from a given file
+
+    :param filename: full file path including it's name
+    :return: dictionary (say d) of the format d[word] = index
+    """
+    try:
+        vocab = dict()
+        with open(filename, 'r') as f:
+            for index, line in enumerate(f):
+                word = line.strip()
+                vocab[word] = index
+
+        return vocab
+
+    except IOError:
+        raise MyIOError(filename)
+
+def export_trimmed_glove_embeddings(vocab, glove_filename, trimmed_filename, dim):
+    """For words in the vocab, extracts the glove embeddings from the glove file,
+    creates a numpy array of the format [vocab[word] = idx, glove vector],
+    and saves this numpy array (a.k.a. trimmed glove embeddings) to trimmed_filename
+
+    :param vocab: dictionary of the format vocab[word] = idx
+    :param glove_filename: file containing glove vectors of dim dimension
+    :param trimmed_filename: file to save the trimmed glove vectors
+    :param dim: dimension of glove vectors
+    """
+
+    embeddings = np.zeros((len(vocab), dim))
+
+    with open(glove_filename, 'r') as f:
+        for line in f:
+            splits = line.split(' ')
+            word = splits[0]
+            embedding = [float(x) for x in splits[1:]]
+
+            if word in vocab:
+                # np.asarray() does not make a new copy of embedding while np.array() does
+                # though here we may be fine with either given that embedding is a local variable
+                # and embeddings are saved to a file
+                embeddings[vocab[word]] = np.asarray(embedding)
+
+    np.savez_compressed(trimmed_filename, embeddings = embeddings) 
 
 
 
