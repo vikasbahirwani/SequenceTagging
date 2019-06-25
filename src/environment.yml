@@ -1,0 +1,12 @@
+name: SeqTagging
+channels:
+  - conda-forge
+  - anaconda
+dependencies:
+  - python>=3.4
+  - anaconda
+  - tensorflow-gpu
+  - jupyter
+  - pip
+  - pip:
+    - git+https://github.com/guillaumegenthial/tf_metrics.git
