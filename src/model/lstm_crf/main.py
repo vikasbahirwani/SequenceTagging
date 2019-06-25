@@ -10,7 +10,7 @@ import tensorflow as tf
 # tf.enable_eager_execution()
 from tf_metrics import precision, recall, f1
 
-DATADIR = "../../../data/toy"
+DATADIR = "../../../data/toy/"
 
 # Setup Logging
 Path('results').mkdir(exist_ok=True)
@@ -73,9 +73,55 @@ def input_fn(words_file, tags_file, params = None, shuffle_and_repeat = False):
 
     return dataset
 
+def model_fn(features, labels, mode, params):
+    """
+
+    :param features: words from sentence and number of words per sentence
+    :param labels: One tag per word
+    :param mode:  tf.estimator.ModeKeys.TRAIN or  tf.estimator.ModeKeys.PREDICT or  tf.estimator.ModeKeys.EVAL
+    :param params: dictionary of hyper parameters for the model
+    :return:
+    """
+
+    # For serving, features are a bit different
+    if isinstance(features, dict):
+        features = features['words'], features['nwords']
+
+    # Read vocab_words_file, vocab_tags_file, features
+    words, nwords = features
+    training = (mode == tf.estimator.ModeKeys.TRAIN)
+    vocab_words = tf.contrib.lookup.index_table_from_file(params['vocab_words_file'], num_oov_buckets = params['num_oov_buckets'])
+
+    '''
+    If the file contains the following: 
+    B-LOC
+    B-PER
+    O
+    I-LOC
+    
+    then indices = [0, 1, 3] and num_tags = 4
+    
+    Open Question: The special treatment of tag indices is probably needed for microavg metrics. Why though?
+    '''
+
+    with Path(params['vocab_tags_file']).open('r') as f:
+        indices = [idx for idx, tag in enumerate(f) if tag.strip() != 'O']
+        num_tags = len(indices) + 1
+
+    # Word Embeddings
+    # remember - as per the parse function "words" is a python list of
+    word_ids = vocab_words.lookup(words)
+    glove = np.load(params['glove'])['embeddings']
+    glove = np.vstack([glove, [[0.]*params['dim']]])
+    variable = tf.Variable(glove, dtype=tf.float32, trainable=False)
+
+
+
 if __name__ == '__main__':
-    dataset = input_fn(Path(DATADIR + '/words.txt'), Path(DATADIR + '/tags.txt'))
-    iterator = dataset.make_one_shot_iterator()
-    node = iterator.get_next()
+    vocab_words = tf.contrib.lookup.index_table_from_file(str(Path(DATADIR, 'vocab.words.txt')), num_oov_buckets = 1)
+    my_text = tf.constant([['San', 'Paris', 'Vikas'], ['I', 'live', 'in']])
+    ids = vocab_words.lookup(my_text)
+
     with tf.Session() as sess:
-        print(sess.run(node))
+        sess.run([tf.global_variables_initializer(), tf.tables_initializer()])
+        print(ids.eval())
