@@ -1,4 +1,3 @@
 # SequenceTagging
 - work in progress. 
-- Tutorial reference: https://guillaumegenthial.github.io/sequence-tagging-with-tensorflow.html
-- Impl reference: https://github.com/guillaumegenthial/sequence_tagging
+- Tutorial reference: https://guillaumegenthial.github.io/introduction-tensorflow-estimator.html#define-a-bi-lstm--crf-model_fn
