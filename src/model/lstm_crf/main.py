@@ -114,6 +114,30 @@ def model_fn(features, labels, mode, params):
     glove = np.load(params['glove'])['embeddings']
     glove = np.vstack([glove, [[0.]*params['dim']]])
     variable = tf.Variable(glove, dtype=tf.float32, trainable=False)
+    embeddings = tf.nn.embedding_lookup(variable, word_ids)
+    dropout = params['dropout']
+    embeddings = tf.layers.dropout(embeddings, rate = dropout, training = training)
+
+    # LSTM CRF
+    time_major = tf.transpose(embeddings, perm = [1, 0, 2])
+    lstm_cell_fw = tf.contrib.rnn.LSTMBlockFusedCell(params['lstm_size'])
+    lstm_cell_bw = tf.contrib.rnn.LSTMBlockFusedCell(params['lstm_size'])
+    lstm_cell_bw = tf.contrib.rnn.TimeReversedFusedRNN(lstm_cell_bw)
+
+    """
+    Any LSTM Cell returns two things: Cell Output (h) and Cell State (c)
+
+    Following this, lstm_fw or lstm_bw each return a pair containing:
+
+    Cell Output: A 3-D tensor of shape [time_len, batch_size, output_size]
+    Final state: a tuple (cell_state, output) produced by the last LSTM Cell in the sequence.
+
+    """
+    output_fw,_ = lstm_cell_fw(time_major, dtype = tf.float32, sequence_length = nwords)
+    output_bw,_ = lstm_cell_bw(time_major, dtype = tf.float32, sequence_length = nwords)
+    output = tf.concat([output_fw, output_bw], axis=-1)
+    output = tf.transpose(output, perm=[1, 0, 2])
+    output = tf.layers.dropout(output, rate=dropout, training=training)
 
 
 
