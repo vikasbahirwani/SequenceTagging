@@ -3,5 +3,5 @@
 *idea
 /data
 !/data/.gitkeep
-/results
+**/results
 *.DS_Store
