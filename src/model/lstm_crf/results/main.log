@@ -1,0 +1,449 @@
+Using config: {'_model_dir': 'results/model', '_tf_random_seed': None, '_save_summary_steps': 100, '_save_checkpoints_steps': None, '_save_checkpoints_secs': 120, '_session_config': allow_soft_placement: true
+graph_options {
+  rewrite_options {
+    meta_optimizer_iterations: ONE
+  }
+}
+, '_keep_checkpoint_max': 5, '_keep_checkpoint_every_n_hours': 10000, '_log_step_count_steps': 100, '_train_distribute': None, '_device_fn': None, '_protocol': None, '_eval_distribute': None, '_experimental_distribute': None, '_service': None, '_cluster_spec': <tensorflow.python.training.server_lib.ClusterSpec object at 0x000001845D991160>, '_task_type': 'worker', '_task_id': 0, '_global_id_in_cluster': 0, '_master': '', '_evaluation_master': '', '_is_chief': True, '_num_ps_replicas': 0, '_num_worker_replicas': 1}
+Not using Distribute Coordinator.
+Running training and evaluation locally (non-distributed).
+Start train and evaluate loop. The evaluate will happen after every checkpoint. Checkpoint frequency is determined based on RunConfig arguments: save_checkpoints_steps None or save_checkpoints_secs 120.
+From C:\anaconda3\envs\SeqTagging\lib\site-packages\tensorflow\python\framework\op_def_library.py:263: colocate_with (from tensorflow.python.framework.ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Colocations handled automatically by placer.
+From C:\anaconda3\envs\SeqTagging\lib\site-packages\tensorflow\python\data\ops\dataset_ops.py:429: py_func (from tensorflow.python.ops.script_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+tf.py_func is deprecated in TF V2. Instead, use
+    tf.py_function, which takes a python function which manipulates tf eager
+    tensors instead of numpy arrays. It's easy to convert a tf eager tensor to
+    an ndarray (just call tensor.numpy()) but having access to eager tensors
+    means `tf.py_function`s can use accelerators such as GPUs as well as
+    being differentiable using a gradient tape.
+    
+Calling model_fn.
+From main.py:119: dropout (from tensorflow.python.layers.core) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use keras.layers.dropout instead.
+From C:\anaconda3\envs\SeqTagging\lib\site-packages\tensorflow\python\keras\layers\core.py:143: calling dropout (from tensorflow.python.ops.nn_ops) with keep_prob is deprecated and will be removed in a future version.
+Instructions for updating:
+Please use `rate` instead of `keep_prob`. Rate should be set to `rate = 1 - keep_prob`.
+From C:\anaconda3\envs\SeqTagging\lib\site-packages\tensorflow\contrib\rnn\python\ops\lstm_ops.py:696: to_int64 (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.cast instead.
+From main.py:143: dense (from tensorflow.python.layers.core) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use keras.layers.dense instead.
+From C:\anaconda3\envs\SeqTagging\lib\site-packages\tensorflow\contrib\crf\python\ops\crf.py:567: dynamic_rnn (from tensorflow.python.ops.rnn) is deprecated and will be removed in a future version.
+Instructions for updating:
+Please use `keras.layers.RNN(cell)`, which is equivalent to this API
+From C:\anaconda3\envs\SeqTagging\lib\site-packages\tensorflow\python\ops\rnn.py:626: to_int32 (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.cast instead.
+From C:\anaconda3\envs\SeqTagging\lib\site-packages\tensorflow\python\ops\metrics_impl.py:455: to_float (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.cast instead.
+Done calling model_fn.
+Create CheckpointSaverHook.
+Graph was finalized.
+Running local_init_op.
+Done running local_init_op.
+Saving checkpoints for 0 into results/model\model.ckpt.
+loss = 27.561548, step = 0
+global_step/sec: 10.3179
+loss = 7.533067, step = 100 (9.692 sec)
+global_step/sec: 11.9917
+loss = 3.1762567, step = 200 (8.338 sec)
+global_step/sec: 11.5253
+loss = 5.4533677, step = 300 (8.677 sec)
+global_step/sec: 12.2867
+loss = 4.533773, step = 400 (8.139 sec)
+global_step/sec: 12.0627
+loss = 2.9024444, step = 500 (8.291 sec)
+global_step/sec: 11.9153
+loss = 3.032308, step = 600 (8.392 sec)
+global_step/sec: 11.9723
+loss = 1.9624634, step = 700 (8.352 sec)
+global_step/sec: 11.59
+loss = 2.5139012, step = 800 (8.628 sec)
+global_step/sec: 11.7692
+loss = 2.168797, step = 900 (8.497 sec)
+global_step/sec: 11.7785
+loss = 1.5481917, step = 1000 (8.490 sec)
+global_step/sec: 11.7129
+loss = 1.8066356, step = 1100 (8.547 sec)
+global_step/sec: 11.6217
+loss = 1.750137, step = 1200 (8.596 sec)
+global_step/sec: 11.5259
+loss = 2.0490642, step = 1300 (8.676 sec)
+Saving checkpoints for 1363 into results/model\model.ckpt.
+Calling model_fn.
+Done calling model_fn.
+Starting evaluation at 2019-07-03T05:33:11Z
+Graph was finalized.
+From C:\anaconda3\envs\SeqTagging\lib\site-packages\tensorflow\python\training\saver.py:1266: checkpoint_exists (from tensorflow.python.training.checkpoint_management) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use standard file APIs to check for files with this prefix.
+Restoring parameters from results/model\model.ckpt-1363
+Running local_init_op.
+Done running local_init_op.
+Evaluation [10/100]
+Evaluation [20/100]
+Evaluation [30/100]
+Evaluation [40/100]
+Evaluation [50/100]
+Evaluation [60/100]
+Evaluation [70/100]
+Evaluation [80/100]
+Evaluation [90/100]
+Evaluation [100/100]
+Finished evaluation at 2019-07-03-05:33:23
+Saving dict for global step 1363: acc = 0.97787976, f1 = 0.90129673, global_step = 1363, loss = 1.0904886, precision = 0.9264155, recall = 0.87750417
+Saving 'checkpoint_path' summary for global step 1363: results/model\model.ckpt-1363
+From C:\anaconda3\envs\SeqTagging\lib\site-packages\tensorflow\python\summary\summary_iterator.py:68: tf_record_iterator (from tensorflow.python.lib.io.tf_record) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use eager execution and: 
+`tf.data.TFRecordDataset(path)`
+global_step/sec: 3.43986
+loss = 1.82267, step = 1400 (29.071 sec)
+global_step/sec: 12.2065
+loss = 1.2722517, step = 1500 (8.192 sec)
+global_step/sec: 11.6733
+loss = 1.8374885, step = 1600 (8.566 sec)
+global_step/sec: 11.6455
+loss = 1.9146032, step = 1700 (8.588 sec)
+global_step/sec: 11.72
+loss = 1.4742157, step = 1800 (8.531 sec)
+global_step/sec: 11.6813
+loss = 2.0048327, step = 1900 (8.562 sec)
+global_step/sec: 11.988
+loss = 0.737722, step = 2000 (8.342 sec)
+global_step/sec: 11.3995
+loss = 0.78138006, step = 2100 (8.773 sec)
+global_step/sec: 11.6796
+loss = 1.5767946, step = 2200 (8.561 sec)
+global_step/sec: 11.8103
+loss = 1.2904427, step = 2300 (8.474 sec)
+global_step/sec: 11.5203
+loss = 2.3589654, step = 2400 (8.673 sec)
+global_step/sec: 11.7777
+loss = 1.3348868, step = 2500 (8.491 sec)
+Saving checkpoints for 2527 into results/model\model.ckpt.
+Skip the current checkpoint eval due to throttle secs (120 secs).
+global_step/sec: 9.58634
+loss = 0.93156147, step = 2600 (10.432 sec)
+global_step/sec: 11.3553
+loss = 1.8626322, step = 2700 (8.806 sec)
+global_step/sec: 11.0586
+loss = 1.0044117, step = 2800 (9.042 sec)
+global_step/sec: 12.2211
+loss = 1.0867486, step = 2900 (8.184 sec)
+global_step/sec: 12.429
+loss = 0.5902759, step = 3000 (8.046 sec)
+global_step/sec: 11.6818
+loss = 0.55915296, step = 3100 (8.560 sec)
+global_step/sec: 11.8396
+loss = 1.8119625, step = 3200 (8.446 sec)
+global_step/sec: 11.6876
+loss = 1.0948308, step = 3300 (8.556 sec)
+global_step/sec: 12.6119
+loss = 1.0834984, step = 3400 (7.929 sec)
+global_step/sec: 12.3792
+loss = 0.8860771, step = 3500 (8.078 sec)
+global_step/sec: 11.4227
+loss = 1.2141105, step = 3600 (8.755 sec)
+global_step/sec: 11.9286
+loss = 1.1372538, step = 3700 (8.389 sec)
+global_step/sec: 12.2002
+loss = 1.0973436, step = 3800 (8.191 sec)
+global_step/sec: 12.0029
+loss = 1.2778606, step = 3900 (8.331 sec)
+Saving checkpoints for 3930 into results/model\model.ckpt.
+Calling model_fn.
+Done calling model_fn.
+Starting evaluation at 2019-07-03T05:37:11Z
+Graph was finalized.
+Restoring parameters from results/model\model.ckpt-3930
+Running local_init_op.
+Done running local_init_op.
+Evaluation [10/100]
+Evaluation [20/100]
+Evaluation [30/100]
+Evaluation [40/100]
+Evaluation [50/100]
+Evaluation [60/100]
+Evaluation [70/100]
+Evaluation [80/100]
+Evaluation [90/100]
+Evaluation [100/100]
+Finished evaluation at 2019-07-03-05:37:23
+Saving dict for global step 3930: acc = 0.9851977, f1 = 0.93246645, global_step = 3930, loss = 0.61432856, precision = 0.9371838, recall = 0.9277963
+Saving 'checkpoint_path' summary for global step 3930: results/model\model.ckpt-3930
+global_step/sec: 3.81176
+loss = 0.9019219, step = 4000 (26.235 sec)
+global_step/sec: 11.2067
+loss = 1.6250988, step = 4100 (8.923 sec)
+global_step/sec: 11.6623
+loss = 0.45083684, step = 4200 (8.575 sec)
+global_step/sec: 11.1971
+loss = 1.3678199, step = 4300 (8.931 sec)
+global_step/sec: 11.5077
+loss = 1.3818331, step = 4400 (8.690 sec)
+global_step/sec: 11.1075
+loss = 1.8287671, step = 4500 (9.003 sec)
+global_step/sec: 12.1466
+loss = 0.67295563, step = 4600 (8.233 sec)
+global_step/sec: 11.2944
+loss = 0.42630544, step = 4700 (8.854 sec)
+global_step/sec: 11.0037
+loss = 1.3272743, step = 4800 (9.088 sec)
+global_step/sec: 11.7238
+loss = 1.3117613, step = 4900 (8.546 sec)
+global_step/sec: 11.8739
+loss = 0.9359149, step = 5000 (8.406 sec)
+global_step/sec: 11.9018
+loss = 0.48825997, step = 5100 (8.402 sec)
+Saving checkpoints for 5108 into results/model\model.ckpt.
+Skip the current checkpoint eval due to throttle secs (120 secs).
+global_step/sec: 9.37141
+loss = 0.83908904, step = 5200 (10.671 sec)
+global_step/sec: 11.7898
+loss = 1.5170679, step = 5300 (8.482 sec)
+global_step/sec: 10.602
+loss = 0.729622, step = 5400 (9.432 sec)
+global_step/sec: 11.5693
+loss = 1.0367283, step = 5500 (8.644 sec)
+global_step/sec: 11.9689
+loss = 0.8480333, step = 5600 (8.355 sec)
+global_step/sec: 11.924
+loss = 0.67062163, step = 5700 (8.386 sec)
+global_step/sec: 11.5527
+loss = 0.95223206, step = 5800 (8.656 sec)
+global_step/sec: 11.2529
+loss = 1.411369, step = 5900 (8.887 sec)
+global_step/sec: 11.5
+loss = 0.43315953, step = 6000 (8.696 sec)
+global_step/sec: 11.3108
+loss = 0.42640835, step = 6100 (8.840 sec)
+global_step/sec: 11.7152
+loss = 1.7546978, step = 6200 (8.537 sec)
+global_step/sec: 11.8832
+loss = 0.23361602, step = 6300 (8.429 sec)
+global_step/sec: 12.0058
+loss = 1.6088804, step = 6400 (8.314 sec)
+Saving checkpoints for 6480 into results/model\model.ckpt.
+From C:\anaconda3\envs\SeqTagging\lib\site-packages\tensorflow\python\training\saver.py:966: remove_checkpoint (from tensorflow.python.training.checkpoint_management) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use standard file APIs to delete files with this prefix.
+Calling model_fn.
+Done calling model_fn.
+Starting evaluation at 2019-07-03T05:41:11Z
+Graph was finalized.
+Restoring parameters from results/model\model.ckpt-6480
+Running local_init_op.
+Done running local_init_op.
+Evaluation [10/100]
+Evaluation [20/100]
+Evaluation [30/100]
+Evaluation [40/100]
+Evaluation [50/100]
+Evaluation [60/100]
+Evaluation [70/100]
+Evaluation [80/100]
+Evaluation [90/100]
+Evaluation [100/100]
+Finished evaluation at 2019-07-03-05:41:23
+Saving dict for global step 6480: acc = 0.9871936, f1 = 0.9395846, global_step = 6480, loss = 0.524631, precision = 0.9445382, recall = 0.9346828
+Saving 'checkpoint_path' summary for global step 6480: results/model\model.ckpt-6480
+global_step/sec: 3.98591
+loss = 1.005273, step = 6500 (25.089 sec)
+global_step/sec: 11.3356
+loss = 0.76645607, step = 6600 (8.823 sec)
+global_step/sec: 11.1337
+loss = 0.3787323, step = 6700 (8.981 sec)
+global_step/sec: 11.7006
+loss = 0.9254893, step = 6800 (8.547 sec)
+global_step/sec: 11.9556
+loss = 0.22763076, step = 6900 (8.364 sec)
+global_step/sec: 11.5727
+loss = 0.3546384, step = 7000 (8.641 sec)
+global_step/sec: 11.1859
+loss = 0.3556643, step = 7100 (8.940 sec)
+global_step/sec: 11.5005
+loss = 0.5820477, step = 7200 (8.695 sec)
+global_step/sec: 11.88
+loss = 0.2785719, step = 7300 (8.418 sec)
+global_step/sec: 11.8014
+loss = 1.3806942, step = 7400 (8.474 sec)
+global_step/sec: 11.8294
+loss = 0.44306248, step = 7500 (8.453 sec)
+global_step/sec: 11.8176
+loss = 0.9718405, step = 7600 (8.470 sec)
+Saving checkpoints for 7674 into results/model\model.ckpt.
+Skip the current checkpoint eval due to throttle secs (120 secs).
+global_step/sec: 9.00862
+loss = 0.55802846, step = 7700 (11.092 sec)
+global_step/sec: 11.585
+loss = 0.6867447, step = 7800 (8.632 sec)
+global_step/sec: 10.811
+loss = 0.2577008, step = 7900 (9.250 sec)
+global_step/sec: 11.2205
+loss = 0.458397, step = 8000 (8.912 sec)
+global_step/sec: 11.58
+loss = 0.6046695, step = 8100 (8.636 sec)
+global_step/sec: 12.0676
+loss = 0.20372348, step = 8200 (8.287 sec)
+global_step/sec: 11.6674
+loss = 0.47866488, step = 8300 (8.571 sec)
+global_step/sec: 11.4427
+loss = 0.5665757, step = 8400 (8.739 sec)
+global_step/sec: 11.3808
+loss = 0.634855, step = 8500 (8.787 sec)
+global_step/sec: 10.9677
+loss = 0.5395729, step = 8600 (9.118 sec)
+global_step/sec: 11.3515
+loss = 0.2876167, step = 8700 (8.809 sec)
+global_step/sec: 11.7945
+loss = 0.6091023, step = 8800 (8.479 sec)
+global_step/sec: 11.6014
+loss = 0.48741046, step = 8900 (8.620 sec)
+global_step/sec: 11.5051
+loss = 0.48564035, step = 9000 (8.710 sec)
+Saving checkpoints for 9023 into results/model\model.ckpt.
+Calling model_fn.
+Done calling model_fn.
+Starting evaluation at 2019-07-03T05:45:11Z
+Graph was finalized.
+Restoring parameters from results/model\model.ckpt-9023
+Running local_init_op.
+Done running local_init_op.
+Evaluation [10/100]
+Evaluation [20/100]
+Evaluation [30/100]
+Evaluation [40/100]
+Evaluation [50/100]
+Evaluation [60/100]
+Evaluation [70/100]
+Evaluation [80/100]
+Evaluation [90/100]
+Evaluation [100/100]
+Finished evaluation at 2019-07-03-05:45:23
+Saving dict for global step 9023: acc = 0.98885673, f1 = 0.9473905, global_step = 9023, loss = 0.49021435, precision = 0.951579, recall = 0.94323874
+Saving 'checkpoint_path' summary for global step 9023: results/model\model.ckpt-9023
+global_step/sec: 3.89294
+loss = 0.5043738, step = 9100 (25.669 sec)
+global_step/sec: 11.5719
+loss = 0.78341544, step = 9200 (8.642 sec)
+global_step/sec: 11.6306
+loss = 0.6002947, step = 9300 (8.598 sec)
+global_step/sec: 11.6549
+loss = 0.3509301, step = 9400 (8.581 sec)
+global_step/sec: 11.7137
+loss = 1.3035921, step = 9500 (8.536 sec)
+global_step/sec: 11.1793
+loss = 0.8540906, step = 9600 (8.946 sec)
+global_step/sec: 11.0701
+loss = 0.73053557, step = 9700 (9.032 sec)
+global_step/sec: 11.6082
+loss = 0.36100632, step = 9800 (8.615 sec)
+global_step/sec: 11.679
+loss = 1.1058352, step = 9900 (8.562 sec)
+global_step/sec: 11.7991
+loss = 1.0570762, step = 10000 (8.475 sec)
+global_step/sec: 11.5598
+loss = 0.57050496, step = 10100 (8.651 sec)
+global_step/sec: 12.0771
+loss = 0.22097369, step = 10200 (8.286 sec)
+Saving checkpoints for 10216 into results/model\model.ckpt.
+Skip the current checkpoint eval due to throttle secs (120 secs).
+global_step/sec: 9.30016
+loss = 0.65825635, step = 10300 (10.747 sec)
+global_step/sec: 11.7811
+loss = 0.7691437, step = 10400 (8.488 sec)
+global_step/sec: 10.682
+loss = 0.41167584, step = 10500 (9.362 sec)
+global_step/sec: 11.314
+loss = 0.87272006, step = 10600 (8.840 sec)
+global_step/sec: 11.4919
+loss = 0.73794687, step = 10700 (8.701 sec)
+global_step/sec: 11.8132
+loss = 1.3260907, step = 10800 (8.465 sec)
+global_step/sec: 11.4043
+loss = 0.63709074, step = 10900 (8.769 sec)
+global_step/sec: 10.7584
+loss = 0.4635218, step = 11000 (9.295 sec)
+global_step/sec: 11.6287
+loss = 0.44327745, step = 11100 (8.599 sec)
+global_step/sec: 11.7838
+loss = 0.085945465, step = 11200 (8.487 sec)
+global_step/sec: 11.3363
+loss = 0.5083464, step = 11300 (8.820 sec)
+global_step/sec: 11.3501
+loss = 0.5040636, step = 11400 (8.810 sec)
+global_step/sec: 11.6902
+loss = 0.9597824, step = 11500 (8.554 sec)
+Saving checkpoints for 11565 into results/model\model.ckpt.
+Calling model_fn.
+Done calling model_fn.
+Starting evaluation at 2019-07-03T05:49:11Z
+Graph was finalized.
+Restoring parameters from results/model\model.ckpt-11565
+Running local_init_op.
+Done running local_init_op.
+Evaluation [10/100]
+Evaluation [20/100]
+Evaluation [30/100]
+Evaluation [40/100]
+Evaluation [50/100]
+Evaluation [60/100]
+Evaluation [70/100]
+Evaluation [80/100]
+Evaluation [90/100]
+Evaluation [100/100]
+Finished evaluation at 2019-07-03-05:49:23
+Saving dict for global step 11565: acc = 0.9881582, f1 = 0.9445259, global_step = 11565, loss = 0.48353314, precision = 0.94750106, recall = 0.94156927
+Saving 'checkpoint_path' summary for global step 11565: results/model\model.ckpt-11565
+global_step/sec: 4.05331
+loss = 0.2900489, step = 11600 (24.670 sec)
+No increase in metric "f1" for 2542 steps, which is greater than or equal to max steps (500) configured for early stopping.
+Requesting early stopping at global step 11612
+Saving checkpoints for 11613 into results/model\model.ckpt.
+Skip the current checkpoint eval due to throttle secs (120 secs).
+Calling model_fn.
+Done calling model_fn.
+Starting evaluation at 2019-07-03T05:49:32Z
+Graph was finalized.
+Restoring parameters from results/model\model.ckpt-11613
+Running local_init_op.
+Done running local_init_op.
+Evaluation [10/100]
+Evaluation [20/100]
+Evaluation [30/100]
+Evaluation [40/100]
+Evaluation [50/100]
+Evaluation [60/100]
+Evaluation [70/100]
+Evaluation [80/100]
+Evaluation [90/100]
+Evaluation [100/100]
+Finished evaluation at 2019-07-03-05:49:44
+Saving dict for global step 11613: acc = 0.98845756, f1 = 0.9462659, global_step = 11613, loss = 0.48150966, precision = 0.9499474, recall = 0.9426127
+Saving 'checkpoint_path' summary for global step 11613: results/model\model.ckpt-11613
+Loss for final step: 0.3857316.
+Calling model_fn.
+Done calling model_fn.
+Graph was finalized.
+Restoring parameters from results/model\model.ckpt-11613
+Running local_init_op.
+Done running local_init_op.
+Calling model_fn.
+Done calling model_fn.
+Graph was finalized.
+Restoring parameters from results/model\model.ckpt-11613
+Running local_init_op.
+Done running local_init_op.
+Calling model_fn.
+Done calling model_fn.
+Graph was finalized.
+Restoring parameters from results/model\model.ckpt-11613
+Running local_init_op.
+Done running local_init_op.

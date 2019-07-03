@@ -10,7 +10,7 @@ import tensorflow as tf
 # tf.enable_eager_execution()
 from tf_metrics import precision, recall, f1
 
-DATADIR = "../../../data/toy/"
+DATADIR = "../../../data/conll/"
 
 # Setup Logging
 Path('results').mkdir(exist_ok=True)
@@ -67,7 +67,7 @@ def input_fn(words_file, tags_file, params = None, shuffle_and_repeat = False):
     dataset = tf.data.Dataset.from_generator(generator, output_shapes = shapes, output_types = types)
 
     if shuffle_and_repeat:
-        dataset = dataset.shuffle(params['buffer']).reduce(params['epochs'])
+        dataset = dataset.shuffle(params['buffer']).repeat(params['epochs'])
 
     dataset = dataset.padded_batch(params.get('batch_size', 20), shapes, defaults).prefetch(1)\
 
@@ -178,7 +178,7 @@ def model_fn(features, labels, mode, params):
 
     # Evaluation Mode or training mode
     if mode == tf.estimator.ModeKeys.EVAL:
-        return tf.estimator.EstimatorSpec(mode, loss = loss, eval_metrics_ops = metrics )
+        return tf.estimator.EstimatorSpec(mode, loss = loss, eval_metric_ops = metrics )
     elif mode == tf.estimator.ModeKeys.TRAIN:
         train_op = tf.train.AdamOptimizer().minimize(loss, global_step=tf.train.get_or_create_global_step())
         return tf.estimator.EstimatorSpec(mode, loss = loss, train_op = train_op)
@@ -223,26 +223,34 @@ if __name__ == '__main__':
     with Path('results/params.json').open('w') as f:
         json.dump(params, f, indent=4, sort_keys=True)
 
+    print('Done writing params to disk')
+
     # Run configuration and estimator
     cfg = tf.estimator.RunConfig(save_checkpoints_secs=120)
     estimator = tf.estimator.Estimator(model_fn, 'results/model', cfg, params)
 
+    print('Done creating estimator spec')
+
     # Defining our input functions
     train_inpf = functools.partial(input_fn, fwords('train'), ftags('train'), params, shuffle_and_repeat=True)
-    eval_inpf = functools.partial(input_fn, fwords('validation'), ftags('validation'))
+    eval_inpf = functools.partial(input_fn, fwords('testa'), ftags('testa'))
 
     # Create an early stopping hook
     Path(estimator.eval_dir()).mkdir(parents=True, exist_ok=True)
     hook = tf.contrib.estimator.stop_if_no_increase_hook(estimator, 'f1', 500, min_steps=8000, run_every_secs=120)
 
-    train_spec = tf.estimtor.TrainSpec(input_fn = train_inpf, hooks = [hook])
+    train_spec = tf.estimator.TrainSpec(input_fn = train_inpf, hooks = [hook])
     eval_spec = tf.estimator.EvalSpec(input_fn = eval_inpf, throttle_secs = 120) # Evaluate every 120 seconds
+
+    print('Done creating train and eval spec')
 
     # Train with early stopping
     tf.estimator.train_and_evaluate(estimator, train_spec, eval_spec)
 
-    for name in ['train', 'validation', 'test']:
-        write_predictions(name)
+    print('Done training and evaluation')
+
+    for name in ['train', 'testa', 'testb']:
+        write_predictions(name, estimator)
 
 
 

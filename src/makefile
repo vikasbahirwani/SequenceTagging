@@ -2,7 +2,7 @@
 # use this file if running in linux
 
 download-glove:
-	wget -P ../data/ "http://nlp.stanford.edu/data/glove.840B.300d.zip"
+	wget -P ../data/ "http://nlp.stanford.edu/data/glove.840B.300d.zip" --no-check-certificate
 	unzip ../data/glove.840B.300d.zip -d ../data/glove.840B.300d.txt
 	rm ../data/glove.840B.300d.zip
 
