@@ -237,6 +237,19 @@ if __name__ == '__main__':
 
     # Create an early stopping hook
     Path(estimator.eval_dir()).mkdir(parents=True, exist_ok=True)
+
+    """
+    Ref: https://stackoverflow.com/questions/47137061/early-stopping-with-tf-estimator-how
+    
+    The parameters for stop_if_no_decrease_hook are as follows:
+    
+    tf.contrib.estimator.stop_if_no_decrease_hook(
+    estimator,
+    metric_name='loss',
+    max_steps_without_decrease=1000,
+    min_steps=100)
+    """
+
     hook = tf.contrib.estimator.stop_if_no_increase_hook(estimator, 'f1', 500, min_steps=8000, run_every_secs=120)
 
     train_spec = tf.estimator.TrainSpec(input_fn = train_inpf, hooks = [hook])

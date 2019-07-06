@@ -447,3 +447,110 @@ Graph was finalized.
 Restoring parameters from results/model\model.ckpt-11613
 Running local_init_op.
 Done running local_init_op.
+Using config: {'_model_dir': 'results/model', '_tf_random_seed': None, '_save_summary_steps': 100, '_save_checkpoints_steps': None, '_save_checkpoints_secs': 120, '_session_config': allow_soft_placement: true
+graph_options {
+  rewrite_options {
+    meta_optimizer_iterations: ONE
+  }
+}
+, '_keep_checkpoint_max': 5, '_keep_checkpoint_every_n_hours': 10000, '_log_step_count_steps': 100, '_train_distribute': None, '_device_fn': None, '_protocol': None, '_eval_distribute': None, '_experimental_distribute': None, '_service': None, '_cluster_spec': <tensorflow.python.training.server_lib.ClusterSpec object at 0x00000233EB310470>, '_task_type': 'worker', '_task_id': 0, '_global_id_in_cluster': 0, '_master': '', '_evaluation_master': '', '_is_chief': True, '_num_ps_replicas': 0, '_num_worker_replicas': 1}
+Not using Distribute Coordinator.
+Running training and evaluation locally (non-distributed).
+Start train and evaluate loop. The evaluate will happen after every checkpoint. Checkpoint frequency is determined based on RunConfig arguments: save_checkpoints_steps None or save_checkpoints_secs 120.
+From C:\anaconda3\envs\SeqTagging\lib\site-packages\tensorflow\python\framework\op_def_library.py:263: colocate_with (from tensorflow.python.framework.ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Colocations handled automatically by placer.
+From C:\anaconda3\envs\SeqTagging\lib\site-packages\tensorflow\python\data\ops\dataset_ops.py:429: py_func (from tensorflow.python.ops.script_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+tf.py_func is deprecated in TF V2. Instead, use
+    tf.py_function, which takes a python function which manipulates tf eager
+    tensors instead of numpy arrays. It's easy to convert a tf eager tensor to
+    an ndarray (just call tensor.numpy()) but having access to eager tensors
+    means `tf.py_function`s can use accelerators such as GPUs as well as
+    being differentiable using a gradient tape.
+    
+Calling model_fn.
+From C:/privateRepos/SequenceTagging/src/model/lstm_crf/main.py:119: dropout (from tensorflow.python.layers.core) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use keras.layers.dropout instead.
+From C:\anaconda3\envs\SeqTagging\lib\site-packages\tensorflow\python\keras\layers\core.py:143: calling dropout (from tensorflow.python.ops.nn_ops) with keep_prob is deprecated and will be removed in a future version.
+Instructions for updating:
+Please use `rate` instead of `keep_prob`. Rate should be set to `rate = 1 - keep_prob`.
+From C:\anaconda3\envs\SeqTagging\lib\site-packages\tensorflow\contrib\rnn\python\ops\lstm_ops.py:696: to_int64 (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.cast instead.
+From C:/privateRepos/SequenceTagging/src/model/lstm_crf/main.py:143: dense (from tensorflow.python.layers.core) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use keras.layers.dense instead.
+From C:\anaconda3\envs\SeqTagging\lib\site-packages\tensorflow\contrib\crf\python\ops\crf.py:567: dynamic_rnn (from tensorflow.python.ops.rnn) is deprecated and will be removed in a future version.
+Instructions for updating:
+Please use `keras.layers.RNN(cell)`, which is equivalent to this API
+From C:\anaconda3\envs\SeqTagging\lib\site-packages\tensorflow\python\ops\rnn.py:626: to_int32 (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.cast instead.
+From C:\anaconda3\envs\SeqTagging\lib\site-packages\tensorflow\python\ops\metrics_impl.py:455: to_float (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.cast instead.
+Done calling model_fn.
+Create CheckpointSaverHook.
+Graph was finalized.
+From C:\anaconda3\envs\SeqTagging\lib\site-packages\tensorflow\python\training\saver.py:1266: checkpoint_exists (from tensorflow.python.training.checkpoint_management) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use standard file APIs to check for files with this prefix.
+Restoring parameters from results/model\model.ckpt-11613
+From C:\anaconda3\envs\SeqTagging\lib\site-packages\tensorflow\python\training\saver.py:1070: get_checkpoint_mtimes (from tensorflow.python.training.checkpoint_management) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use standard file utilities to get mtimes.
+Running local_init_op.
+Done running local_init_op.
+Saving checkpoints for 11613 into results/model\model.ckpt.
+From C:\anaconda3\envs\SeqTagging\lib\site-packages\tensorflow\python\summary\summary_iterator.py:68: tf_record_iterator (from tensorflow.python.lib.io.tf_record) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use eager execution and: 
+`tf.data.TFRecordDataset(path)`
+No increase in metric "f1" for 2542 steps, which is greater than or equal to max steps (500) configured for early stopping.
+Requesting early stopping at global step 11613
+loss = 1.0066566, step = 11613
+Saving checkpoints for 11614 into results/model\model.ckpt.
+From C:\anaconda3\envs\SeqTagging\lib\site-packages\tensorflow\python\training\saver.py:966: remove_checkpoint (from tensorflow.python.training.checkpoint_management) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use standard file APIs to delete files with this prefix.
+Calling model_fn.
+Done calling model_fn.
+Starting evaluation at 2019-07-06T02:41:37Z
+Graph was finalized.
+Restoring parameters from results/model\model.ckpt-11614
+Running local_init_op.
+Done running local_init_op.
+Evaluation [10/100]
+Evaluation [20/100]
+Evaluation [30/100]
+Evaluation [40/100]
+Evaluation [50/100]
+Evaluation [60/100]
+Evaluation [70/100]
+Evaluation [80/100]
+Evaluation [90/100]
+Evaluation [100/100]
+Finished evaluation at 2019-07-06-02:41:49
+Saving dict for global step 11614: acc = 0.9883578, f1 = 0.94574785, global_step = 11614, loss = 0.48129192, precision = 0.9493272, recall = 0.9421953
+Saving 'checkpoint_path' summary for global step 11614: results/model\model.ckpt-11614
+Loss for final step: 1.0066566.
+Calling model_fn.
+Done calling model_fn.
+Graph was finalized.
+Restoring parameters from results/model\model.ckpt-11614
+Running local_init_op.
+Done running local_init_op.
+Calling model_fn.
+Done calling model_fn.
+Graph was finalized.
+Restoring parameters from results/model\model.ckpt-11614
+Running local_init_op.
+Done running local_init_op.
+Calling model_fn.
+Done calling model_fn.
+Graph was finalized.
+Restoring parameters from results/model\model.ckpt-11614
+Running local_init_op.
+Done running local_init_op.
